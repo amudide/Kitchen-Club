@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kitchen Club</title>
+        <link rel = "stylesheet" href = "{{ url_for('static', filename = 'styles/the-style.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <img src = "{{ url_for('static', filename = 'imgs/logo.PNG') }}" style = "display: block; margin-left: auto; margin-right: auto; width: 200px;">
+        <div id="container1">
+            <a class="btn btn-primary" href="{{ url_for('getIngredient') }}" role="button">Get Recipes!</a>
+            <a class="btn btn-primary" href="{{ url_for('makePost') }}" role="button">Make a post!</a>
+        </div>
+        <hr>
+
+        {% for i in range(num - 1, -1, -1) %}
+            <div style = "height: 550px">
+                <h3 style = "text-align: center">{{ posts[i][0] }}</h3> <br>
+                <img class = "center" width="400px" height = "300px" src="{{ posts[i][2] }}"> <br>
+                <h6 style = "text-align: center">{{ posts[i][1] }}</h6> <br>
+                <hr>
+            </div>
+        {% endfor %}
+    </body>
+</html>

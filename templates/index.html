@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kitchen Club</title>
+        <link rel = "stylesheet" href = "{{ url_for('static', filename = 'styles/the-style.css') }}">
+    </head>
+    <body>
+        <img src = "{{ url_for('static', filename = 'imgs/logo.PNG') }}" style = "display: block; margin-left: auto; margin-right: auto; width: 200px;">
+
+        <h3>Kitchen Club provides you with a curated list of recipes based on what ingredient you would like to use!</h3>
+
+        <form action="{{ url_for('recipes') }}" method="post">
+            Ingredient: <br>
+            <input type="text" name="ingredient"> <br> <br>
+            Number of recipes: <br>
+            <input type="text" name="recipes"> <br> <br>
+            <input type="submit" value="Find me recipes!">
+        </form>
+    </body>
+</html>

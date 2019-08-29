@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kitchen Club</title>
+        <link rel = "stylesheet" href = "{{ url_for('static', filename = 'styles/the-style.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <img src = "{{ url_for('static', filename = 'imgs/logo.PNG') }}" style = "display: block; margin-left: auto; margin-right: auto; width: 200px;">
+        <hr>
+        <div style = "margin: 20px;">
+            <form action="{{ url_for('home') }}" method="post">
+                Caption: <br>
+                <input type="text" name="caption"> <br> <br>
+                Recipe Name: <br>
+                <input type="text" name="recipe"> <br> <br>
+                Picture URL: <br>
+                <input type="text" name="pic"> <br> <br>
+                <input type="submit" value="Post!">
+            </form>
+        </div>
+    </body>
+</html>

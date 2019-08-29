@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kitchen Club</title>
+        <link rel = "stylesheet" href = "{{ url_for('static', filename = 'styles/the-style.css') }}">
+    </head>
+    <body>
+        <img src = "{{ url_for('static', filename = 'imgs/logo.PNG') }}" style = "display: block; margin-left: auto; margin-right: auto; width: 200px;">
+
+        <h3>Here are your {{recipes}} recipes using the ingredient {{ingredient}}</h3>
+
+        <ul>
+            {% for i in range(recipes) %}
+                <li>{{ recipe_names[i] }}</li>
+                <img src = "{{ recipe_links[i] }}">
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </body>
+</html>
