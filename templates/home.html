@@ -13,11 +13,11 @@
         </div>
         <hr>
 
-        {% for i in range(num - 1, -1, -1) %}
+        {% for i in range(num - 1, -1, -2) %}
             <div style = "height: 550px">
                 <h3 style = "text-align: center">{{ posts[i][0] }}</h3> <br>
-                <img class = "center" width="400px" height = "300px" src="{{ posts[i][2] }}"> <br>
-                <h6 style = "text-align: center">{{ posts[i][1] }}</h6> <br>
+                <img class = "center" width="400px" height = "300px" src="{{ posts[i][1] }}"> <br>
+                <h6 style = "text-align: center">{{ posts[i][2] }}</h6> <br>
                 <hr>
             </div>
         {% endfor %}

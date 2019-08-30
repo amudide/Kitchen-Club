@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 
 import requests
+import csv
 
 app = Flask(__name__)
 
@@ -13,9 +14,17 @@ def home():
         recipe = request.form.get('recipe')
         pic = request.form.get('pic')
 
-        posts.append([caption, recipe, pic])
+        afile = open("posts.csv", "a")
+        writer = csv.writer(afile)
+        writer.writerow((caption, pic, recipe))
+        afile.close()
 
-    return render_template("home.html", posts = posts, num = len(posts))
+    rfile = open("posts.csv", "r")
+    reader = csv.reader(rfile)
+    posts = list(reader)
+    rfile.close()
+
+    return render_template("home.html", posts = posts, num = len(posts) - 1)
 
 @app.route('/getIngredient')
 def getIngredient():
