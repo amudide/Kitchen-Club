@@ -4,6 +4,14 @@
         <title>Kitchen Club</title>
         <link rel = "stylesheet" href = "{{ url_for('static', filename = 'styles/the-style.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <style>
+            input[type="text"] {
+                position: relative;
+                display: block;
+                margin : 0 auto;
+            }
+        </style>
     </head>
     <body>
         <img src = "{{ url_for('static', filename = 'imgs/logo.PNG') }}" style = "display: block; margin-left: auto; margin-right: auto; width: 200px;">
@@ -12,14 +20,41 @@
             <a class="btn btn-primary" href="{{ url_for('makePost') }}" role="button">Make a post!</a>
         </div>
         <hr>
+        <input type="text" name="query" placeholder="Search Posts"> <br>
 
-        {% for i in range(num - 1, -1, -2) %}
-            <div style = "height: 550px">
-                <h3 style = "text-align: center">{{ posts[i][0] }}</h3> <br>
-                <img class = "center" width="400px" height = "300px" src="{{ posts[i][1] }}"> <br>
-                <h6 style = "text-align: center">{{ posts[i][2] }}</h6> <br>
-                <hr>
-            </div>
-        {% endfor %}
+        <div id="posts">
+            {% for i in range(num - 1, -1, -2) %}
+                <div style = "height: 550px">
+                    <h3 style = "text-align: center">{{ posts[i][0] }}</h3> <br>
+                    <img class = "center" width="400px" height = "300px" src="{{ posts[i][1] }}"> <br>
+                    <h6 style = "text-align: center">{{ posts[i][2] }}</h6> <br>
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            let input = document.querySelector('input');
+
+            input.onkeyup = function() {
+                $.get('/search?q=' + input.value, function(data) {
+
+                    let html = '';
+                    for (post of data)
+                    {
+                        html += `
+                            <div style = "height: 550px">
+                                <h3 style = "text-align: center">${post[0]}</h3> <br>
+                                <img class = "center" width="400px" height = "300px" src="${post[1]}"> <br>
+                                <h6 style = "text-align: center">${post[2]}</h6> <br>
+                                <hr>
+                            </div>
+                        `;
+                    }
+                    document.querySelector('#posts').innerHTML = html;
+                });
+            };
+        </script>
     </body>
 </html>

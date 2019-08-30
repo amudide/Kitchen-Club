@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 import requests
 import csv
@@ -25,6 +25,24 @@ def home():
     rfile.close()
 
     return render_template("home.html", posts = posts, num = len(posts) - 1)
+
+@app.route('/search')
+def search():
+    q = request.args.get('q')
+
+    rfile = open("posts.csv", "r")
+    reader = csv.reader(rfile)
+    posts = list(reader)
+    rfile.close()
+
+    match_posts = []
+    num = len(posts) - 1
+    for i in range(0, num, 2):
+        if (posts[i][2].upper()).startswith(str(q).upper()):
+            match_posts.append([posts[i][0], posts[i][1], posts[i][2]])
+
+    print(jsonify(match_posts))
+    return jsonify(match_posts)
 
 @app.route('/getIngredient')
 def getIngredient():
